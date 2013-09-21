@@ -1,0 +1,26 @@
+{
+	"name": "Impervious Cover",
+	"version": "0.1.4",
+	"manifest_version": 2,
+	"description": "A decision making tool for conservationist efforts.",
+	"app": {
+		"background": {
+	       		     "scripts": ["src/starter.js"]
+		}
+	},	
+	"permissions": [
+		       "http://localhost/*",
+		       "http://*/",
+		       "http://*/*",
+		       "https://maps.google.com/*",
+		       "https://maps.googleapis.com/*",
+		       "geolocation",
+		       "webview",
+		       "fileSystem",
+		       "identity",
+		       "storage"
+	],
+	"sandbox": {
+		   "pages": ["html/main.html"]
+	}
+}

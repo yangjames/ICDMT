@@ -1,0 +1,5 @@
+cb.__call(
+    "oauth_requestToken",
+    {oauth_callback: "tbd"},
+    function (reply) {
+	cb.setToken(reply.

@@ -1,0 +1,16 @@
+.login {
+    width: 100%;
+    height: 50%;
+    text-align: center;
+}
+
+.map { 
+    width: 100%;
+    height: 50%;
+}
+
+#twitter-login-button {
+    background-image: url(../assets/sign-in-with-twitter-gray.png);
+    width: 164px;
+    height: 33px;
+}
