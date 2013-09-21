@@ -1,21 +1,13 @@
 var cb;
 
-var parameters = {};
-var parameter;
-
-$('#testline').html("clicked");
 $('#twitter-login-button').click(function() {
-	$('#testline').html("clicked");
 	cb = new Codebird;
 	cb.setConsumerKey(twitterConsumerKey,twitterConsumerSecret);
 	cb.__call(
 		  "oauth_requestToken",
 		  {oauth_callback: "oob"},
 		  function (reply) {
-		      // stores it
 		      cb.setToken(reply.oauth_token, reply.oauth_token_secret);
-		      
-		      // gets the authorize screen URL
 		      cb.__call(
 				"oauth_authorize",
 				{},
@@ -25,45 +17,62 @@ $('#twitter-login-button').click(function() {
 				);
 		  }
 		  );
-
+	
 	$('#twitter-login-button').hide();
 	$('#pinform').show();
 	$('#click-confirmation').html('Redirecting to login page. Please type in login information and click "Authorize App." Enter the PIN on the next page in the field below.');
     });
 
 $('#pin-submission').bind('keypress', function (e) {
-	var pin;
 	if(e.keyCode==13) {
-	    pin=$('#pin-submission').val();
-	    //    $('#testline').html(pin);
+	    var pin=$('#pin-submission').val();
+	    submitPin(pin);
 	}
-	submitPin(pin);
     });
+
 $('#pin-submit-button').click(function() {
 	submitPin($('#pin-submission').val());
     });
 
+var user_id;
+var screen_name;
+
 function submitPin(pin) {
-    $('#testline').html(pin);
     cb.__call(
 	      "oauth_accessToken",
 	      {oauth_verifier: pin},
 	      function (reply) {
-		  $('#testline').html("got token " + reply.oauth_token);
 		  cb.setToken(reply.oauth_token, reply.oauth_token_secret);
-		  sendTweet();
+		  user_id=reply.user_id;
+		  screen_name=reply.screen_name;
+		  switchDisplay();
 	      }
 	      );
 }
 
-function sendTweet() {
+function sendTweet(str) {
 
     $('#testline').html("got this far");
     cb.__call(
 	      "statuses_update",
-	      {"status": "jquery submission test"},
+	      {"status": str},
 	      function(reply) {
 		  $('#testline').html("got reply after tweet");
 	      }
 	      );
+}
+
+function switchDisplay() {
+    $('.login').hide();
+    $('.map').show();
+    var window=chrome.app.window.current();
+
+    $('#testline').html("got this far");
+    var screenWidth = screen.availWidth;
+    var screenHeight = screen.availHeight;
+    var width = 850;
+    var height = 700;
+    window.moveTo(Math.round((screenWidth-width)/2),
+		Math.round((screenHeight-height)/2)
+		  );
 }
