@@ -6,16 +6,20 @@
   <body>
     <div class="login">
       <input id="twitter-login-button" type="button"/>
-      <p id='testline'>This is a test</p>
+      <p id="click-confirmation"></p>
+      <form id="pin-submission" style="display:none">
+	<input type="text" value="Enter PIN"/>
+	<input type="submit" value="Submit"/>
+      </form>
+      <p id="testline">test1</p>
     </div>
     <div class="map" style="display:none">
       helloworld2
     </div>
     <script src="../src/jquery-2.0.2.js"></script>
     <script src="../src/apiKeys.js"></script>
-    <script type="text/javascript" src="../src/codebird-js/sha1.js"></script>
-    <script type="text/javascript" src="../src/codebird-js/codebird.js"></script>
+    <script type="text/javascript" src="../src/sha1.js"></script>
+    <script type="text/javascript" src="../src/codebird.js"></script>
     <script src="../src/oauthRequest.js"></script>
-
   </body>
 </html>
