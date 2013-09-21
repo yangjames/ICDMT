@@ -2,24 +2,42 @@
 <html>
   <head>
     <link href="../css/main.css" rel="stylesheet">
+    <link href="../css/map.css" rel="stylesheet">
   </head>
   <body>
+    
+    <!-- MAP MODULE -->
+    <div>
+      <span id="testline">testline exists</span>
+    </div>
+    <span class="map-area">
+      <div id="map-canvas">
+      </div>
+    </span>
+
+    <!-- LOGIN MODULE -->
     <div class="login">
-      <input id="twitter-login-button" type="button"/>
-      <p id="click-confirmation"></p>
+      <span id="login-options">
+	<input id="twitter-login-button" type="button"/><br>
+	or<br>
+	<input id="no-login-button" type="button" value="Proceed without logging in"/><br>
+      </span>
       <span id="pinform" style="display:none">
+	<p id="click-confirmation"></p>
 	<input id="pin-submission" type="text" value="Enter PIN"/>
 	<input id="pin-submit-button" type="button" value="Submit"/>
       </span>
+      <p id="login-status-text"></p>
     </div>
-    <div class="map" style="display:none">
-      <p id="testline"></p>
-      helloworld2
-    </div>
-    <script src="../src/jquery-2.0.2.js"></script>
-    <script src="../src/apiKeys.js"></script>
+		
+      
+    <!-- JAVASCRIPT IMPORTS -->
+    <script type="text/javascript" src="../src/jquery-2.0.2.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="../src/apiKeys.js"></script>
     <script type="text/javascript" src="../src/sha1.js"></script>
     <script type="text/javascript" src="../src/codebird.js"></script>
-    <script src="../src/oauthRequest.js"></script>
+    <script type="text/javascript" src="../src/map.js"></script> 
+    <script type="text/javascript" src="../src/oauthRequest.js"></script>
   </body>
 </html>

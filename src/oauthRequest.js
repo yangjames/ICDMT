@@ -18,7 +18,8 @@ $('#twitter-login-button').click(function() {
 		  }
 		  );
 	
-	$('#twitter-login-button').hide();
+	$('#login-options').hide();
+	//	$('#twitter-login-button').hide();
 	$('#pinform').show();
 	$('#click-confirmation').html('Redirecting to login page. Please type in login information and click "Authorize App." Enter the PIN on the next page in the field below.');
     });
@@ -38,6 +39,8 @@ var user_id;
 var screen_name;
 
 function submitPin(pin) {
+    $('#pinform').hide();
+    $('#login-status-text').html('Loading. Please wait...');
     cb.__call(
 	      "oauth_accessToken",
 	      {oauth_verifier: pin},
@@ -49,6 +52,10 @@ function submitPin(pin) {
 	      }
 	      );
 }
+
+$('#no-login-button').click(function() {
+	switchDisplay();
+    });
 
 function sendTweet(str) {
 
@@ -64,15 +71,6 @@ function sendTweet(str) {
 
 function switchDisplay() {
     $('.login').hide();
-    $('.map').show();
-    var window=chrome.app.window.current();
-
-    $('#testline').html("got this far");
-    var screenWidth = screen.availWidth;
-    var screenHeight = screen.availHeight;
-    var width = 850;
-    var height = 700;
-    window.moveTo(Math.round((screenWidth-width)/2),
-		Math.round((screenHeight-height)/2)
-		  );
+    $('.map-area').show();
+    mapSetup();
 }
