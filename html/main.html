@@ -20,16 +20,37 @@
 
     <!-- LOGIN MODULE -->
     <div class="login">
+      <!-- DISPLAY LOGIN OPTIONS -->
       <span id="login-options">
 	<input id="twitter-login-button" type="button"/><br>
+	<input id="email-login-button" type="button" value="Sign in with ICDMT Account"/><br>
+	<input id="email-register-button" type="button" value="Make an account"/><br>
 	or<br>
 	<input id="no-login-button" type="button" value="Proceed without logging in"/><br>
       </span>
+      <!-- EMAIL LOGIN FORM -->
+      <span id="email-form" style="display:none">
+	Please enter your account info<br>
+	Email Address: <input type="text" id="login-email"><br>
+	Password: <input type="password" id="login-password"><br>
+	<input id="email-login-submit-button" type="button" value="Login">
+      </span>
+      <!-- NEW ACCOUNT FORM -->
+      <span id="new-account-form" style="display:none">
+	Please enter a desired Email address, password, and your name.<br>
+	Email Address: <input id="register-email" type="text"><br>
+	Password: <input id="register-password" type="password"><br>
+	First Name: <input id="register-first-name" type="text"><br>
+	Last Name: <input id="register-last-name" type="text"><br>
+	<input type="button" value="Create account">
+      </span>
+      <!-- TWITTER OAUTH PIN ENTRY FORM -->
       <span id="pinform" style="display:none">
 	<p id="click-confirmation"></p>
 	<input id="pin-submission" type="text" value="Enter PIN"/>
 	<input id="pin-submit-button" type="button" value="Submit"/>
       </span>
+      <!-- LOGIN STATUS -->
       <p id="login-status-text"></p>
     </div>
 		
@@ -41,6 +62,6 @@
     <script type="text/javascript" src="../src/sha1.js"></script>
     <script type="text/javascript" src="../src/codebird.js"></script>
     <script type="text/javascript" src="../src/map.js"></script> 
-    <script type="text/javascript" src="../src/oauthRequest.js"></script>
+    <script type="text/javascript" src="../src/login.js"></script>
   </body>
 </html>
