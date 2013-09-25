@@ -88,13 +88,12 @@ $('#email-login-submit-button').click(function() {
     checkInfo();
 });
     
-function sendLoginInfo(serialized_form) {
-    $('#login-status-text').html(serialized_form);
+function sendLoginInfo(login_form) {
+    $('#login-status-text').html(login_form);
 
   $.ajax({
 	url: serverURL+'/login.php',
 	type: 'POST',
-	contentType: 'application/json',
 	data: serialized_form,
 	dataType:'json'
     });
@@ -108,9 +107,8 @@ function checkInfo() {
     var email = $('#login-email').val();
     var password = $('#login-password').val();
     var login_form = {email: email, password: password};
-    var serialized_form=JSON.stringify(login_form);
     if (validateEmail(email) && validatePassword(password)) {
-	sendLoginInfo(serialized_form);
+	sendLoginInfo(login_form);
 	login_email=email;
     }
     else {
