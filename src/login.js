@@ -49,7 +49,7 @@ function submitPin(pin) {
 		  screen_name=reply.screen_name;
 		  switchDisplay();
 	      }
-	      );
+	);
 }
 
 function sendTweet(str) {
@@ -59,9 +59,9 @@ function sendTweet(str) {
 	      "statuses_update",
 	      {"status": str},
 	      function(reply) {
-		  $('#testline').html("got reply after tweet");
+			$('#testline').html("got reply after tweet");
 	      }
-	      );
+		  );
 }
 
 //********************************
@@ -76,12 +76,12 @@ $('#email-login-button').click(function() {
 
 $('#login-email').bind('keypress', function (e) {
     if(e.keyCode==13)
-	checkInfo();
+		checkInfo();
 });
 
 $('#login-password').bind('keypress', function(e) {
     if(e.keyCode==13)
-	checkInfo();
+		checkInfo();
 });
 
 $('#email-login-submit-button').click(function() {
@@ -89,13 +89,18 @@ $('#email-login-submit-button').click(function() {
 });
     
 function sendLoginInfo(login_form) {
-    $('#login-status-text').html(login_form);
-
-  $.ajax({
-	url: serverURL+'/login.php',
-	type: 'POST',
-	data: serialized_form,
-	dataType:'json'
+    $('#login-status-text').html(serverURL+'/cgi-bin/hello.py');
+	$.ajax({
+		url: serverURL+'/cgi-bin/hello.py',
+		type: 'post',
+		data: login_form,
+		dataType:'json',
+		success: function() {
+			$('#login-status-text').html("submitted!");
+		},
+		error: function(jqXHR,exception) {
+			$('#login-status-text').html("error while submit : "+jqXHR.status +"<br>submitted: " + login_form.email + " " + login_form.password);
+		}
     });
 }
 
@@ -106,18 +111,19 @@ function sendLoginInfo(login_form) {
 function checkInfo() {
     var email = $('#login-email').val();
     var password = $('#login-password').val();
-    var login_form = {email: email, password: password};
+    // var serialized_form=JSON.stringify(login_form);
     if (validateEmail(email) && validatePassword(password)) {
-	sendLoginInfo(login_form);
-	login_email=email;
+		var login_form = {email: email, password: password};
+		sendLoginInfo(login_form);
+		login_email=email;
     }
     else {
-	$('#login-status-text').html("Invalid email or password. Please try again.");
+		$('#login-status-text').html("Invalid email or password. Please try again.");
 
-	$('#login-status-text').fadeOut(2000, function() {
-	    $('#login-status-text').html("");
-	    $('#login-status-text').show();
-	});
+		$('#login-status-text').fadeOut(2000, function() {
+			$('#login-status-text').html("");
+			$('#login-status-text').show();
+		});
     }
 }
 
