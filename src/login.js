@@ -87,19 +87,22 @@ $('#login-password').bind('keypress', function(e) {
 $('#email-login-submit-button').click(function() {
     checkInfo();
 });
-    
+
 function sendLoginInfo(login_form) {
-    $('#login-status-text').html(serverURL+'/cgi-bin/hello.py');
 	$.ajax({
 		url: serverURL+'/cgi-bin/hello.py',
 		type: 'post',
 		data: login_form,
-		dataType:'json',
-		success: function() {
-			$('#login-status-text').html("submitted!");
+		async: true,
+		//dataType:'json',
+		//jsonp: false,
+		timeout: 500,
+		context: document.body,
+		error: function(jqXHR,textStatus, errorThrown) {
+			$('#login-status-text').html("Error: " + textStatus + "\nHTTP Error: " + errorThrown);
 		},
-		error: function(jqXHR,exception) {
-			$('#login-status-text').html("error while submit : "+jqXHR.status +"<br>submitted: " + login_form.email + " " + login_form.password);
+		success: function(response) {
+			$('#login-status-text').html(response);
 		}
     });
 }
